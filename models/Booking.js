@@ -18,8 +18,11 @@ const Booking = db.define("booking", {
     deskripsi_booking: {
         type: DataTypes.STRING,
     },
+    id_patient: {
+        type: DataTypes.STRING,
+    }
 });
-
+Patient.hasMany(Booking, { foreignKey: 'id_patient' });
 export default Booking;
 
 // If table "Booking" doesn't exist, this function creates it

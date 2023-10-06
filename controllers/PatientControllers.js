@@ -1,14 +1,24 @@
 import { nanoid } from "nanoid";
 import Doctor from "../models/Doctor.js";
 import Patient from "../models/Patient.js";
+import Nurse from "../models/nurse.js";
+import Booking from "../models/Booking.js";
 
 export const createPatient = async (req, res) => {
   try {
+    // asosiasi patient dan doctor
     const { id_doctor } = req.body;
     const doctor = await Doctor.findOne({ where: {id: id_doctor}});
     if (!doctor) {
       return res.status(404).json({ error: "Doctor not found on DB" });
     }
+    // asosiasi patient dan nurse
+    const { id_nurse } = req.body;
+    const nurse = await Nurse.findOne({ where: {id: id_nurse}});
+    if (!nurse) {
+      return res.status(404).json({ error: "Nurse not found on DB" });
+    }
+
     const id = nanoid(5);
     await Patient.create({ ...req.body, id: id });
     res.status(201).json({
@@ -51,11 +61,18 @@ export const updatePatients = async (req, res) => {
       return res.status(404).json({ error: "Patient not found on DB" });
     }
 
-    // validasi id dokter
+    // validasi id_doctor
     const { id_doctor } = req.body;
     const doctor = await Doctor.findOne({ where: {id: id_doctor}});
     if (!doctor) {
       return res.status(404).json({ error: "Doctor not found on DB" });
+    }
+
+    // validasi id_nurse
+    const { id_nurse } = req.body;
+    const nurse = await Doctor.findOne({ where: {id: id_nurse}});
+    if (!nurse) {
+      return res.status(404).json({ error: "Nurse not found on DB" });
     }
 
     // Update data

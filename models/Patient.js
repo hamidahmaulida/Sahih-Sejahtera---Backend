@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
 import db from '../config/database.js';
 import Doctor from "./Doctor.js";
+import Nurse from "./nurse.js";
 
 const Patient = db.define("patient", {
     id: {
@@ -24,11 +25,14 @@ const Patient = db.define("patient", {
     },
     id_doctor: {
         type: DataTypes.STRING,
+    },
+    id_nurse: {
+        type: DataTypes.STRING
     }
 });
 
 Patient.belongsTo(Doctor, { foreignKey: 'id_doctor' });
-
+Patient.belongsTo(Nurse, { foreignKey: 'id_nurse' });
 export default Patient;
 
 // If table "Patient" doesn't exist, this function creates it

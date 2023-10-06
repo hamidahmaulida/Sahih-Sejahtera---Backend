@@ -1,8 +1,16 @@
 import { nanoid } from "nanoid";
 import Booking from "../models/Booking.js";
+import Patient from "../models/Patient.js";
 
 export const createBooking = async (req, res) => {
   try {
+    // asosiasi patient dan booking
+    const { id_patient } = req.body;
+    const patient = await Patient.findAll({ where: {id: id_patient}});
+    if (!patient) {
+      return res.status(404).json({ error: "Patient not found on DB" });
+    }
+
     const id = nanoid(5);
     await Booking.create({ ...req.body, id: id });
     res.status(201).json({
@@ -12,6 +20,13 @@ export const createBooking = async (req, res) => {
     res.send(error.message);
   }
 };
+
+    // validasi id_patient
+    const { id_patient } = req.body;
+    const patient = await Patient.findOne({ where: {id: id_patient}});
+    if (!patient) {
+      return res.status(404).json({ error: "Patient not found on DB" });
+    } 
 
 export const getBooking = async (req, res) => {
     try {
