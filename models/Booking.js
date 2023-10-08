@@ -1,21 +1,28 @@
 import { DataTypes } from "sequelize";
 import db from '../config/database.js';
+import Patient from "./Patient.js";
 
 const Booking = db.define("booking", {
     id: {
         type: DataTypes.STRING,
         primaryKey: true,
     },
-    fullname: {
+    first_name: {
+        type: DataTypes.STRING,
+    },
+    last_name: {
         type: DataTypes.STRING,
     },
     email: {
         type: DataTypes.STRING,
     },
-    tanggal_booking: {
+    date: {
         type: DataTypes.DATE,
     },
-    deskripsi_booking: {
+    input: {
+        type: DataTypes.STRING,
+    },
+    message: {
         type: DataTypes.STRING,
     },
     id_patient: {

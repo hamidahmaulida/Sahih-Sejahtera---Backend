@@ -2,7 +2,6 @@ import { nanoid } from "nanoid";
 import Doctor from "../models/Doctor.js";
 import Patient from "../models/Patient.js";
 import Nurse from "../models/nurse.js";
-import Booking from "../models/Booking.js";
 
 export const createPatient = async (req, res) => {
   try {
