@@ -11,8 +11,8 @@ export const createContact = async (req, res) => {
       data: {
         name: name,
         email: email,
-        message: message
-      }
+        message: message,
+      },
     });
   } catch (error) {
     res.send(error.message);
@@ -22,48 +22,77 @@ export const createContact = async (req, res) => {
 export const getContact = async (req, res) => {
   try {
     const { id } = req.params;
-    const contact = await Contact.findOne({ where: {id: id }});
+    const contact = await Contact.findOne({ where: { id: id } });
     if (!contact) {
       return res.status(404).json({ error: "Contact not found on DB" });
     }
-    res.status(200).json(contact)
+    const formattedJson = JSON.stringify(contact, null, 2);
+    // Send data in the desired JSON format
+    const htmlResponse = `
+    <html>
+    <head>
+      <style>
+        body {
+          background-color: black;
+          color: white;
+        }
+      </style>
+    </head>
+    <body>
+      <pre>${formattedJson}</pre>
+    </body>
+  </html>`;
+
+    res.status(200).send(htmlResponse);
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    res.status(500).json({ error: error.message });
   }
-}
+};
 
 export const getAllContacts = async (req, res) => {
   try {
     const contact = await Contact.findAll();
     // Convert data to the desired format
-    const formattedContacts = contact.map(contact => {
+    const formattedContacts = contact.map((contact) => {
       return {
         id: contact.id,
         name: contact.name,
         email: contact.email,
-        message: contact.message
+        message: contact.message,
       };
     });
 
     // Convert data to the desired JSON format
-    const formattedJson = JSON.stringify(formattedContacts, null, 2)
-      .replace(/\n/g, '<br>');
+    const formattedJson = JSON.stringify(formattedContacts, null, 2);
 
     // Send data in the desired JSON format
-    res.status(200).send(`\n${formattedJson}\n`);
+    const htmlResponse = `
+    <html>
+    <head>
+      <style>
+        body {
+          background-color: black;
+          color: white;
+        }
+      </style>
+    </head>
+    <body>
+      <pre>${formattedJson}</pre>
+    </body>
+  </html>`;
 
-    // res.status(200).json(contact)
+    res.status(200).send(htmlResponse);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-}
+};
 
 export const updateContact = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, email, message } = req.body;
-    const contact = await Contact.findOne({ where: {id: id }});
-    
+    const contact = await Contact.findOne({ where: { id: id } });
+
     if (!contact) {
       return res.status(404).json({ error: "Contact not found on DB" });
     }
@@ -79,21 +108,21 @@ export const updateContact = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-}
+};
 
 export const deleteContact = async (req, res) => {
   try {
     const { id } = req.params;
-    const contact = await Contact.findOne({ where: {id: id }});
-    
+    const contact = await Contact.findOne({ where: { id: id } });
+
     if (!contact) {
       return res.status(404).json({ error: "Contact not found on DB" });
     }
 
     // delete data
     await contact.destroy();
-    res.status(200).json({ message: "Contact berhasil dihapus"});
+    res.status(200).json({ message: "Contact berhasil dihapus" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-}
+};

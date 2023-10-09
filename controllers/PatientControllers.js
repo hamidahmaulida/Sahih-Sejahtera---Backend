@@ -35,7 +35,24 @@ export const getPatient = async (req, res) => {
     if (!patient) {
       return res.status(404).json({ error: "Patient not found on DB" });
     }
-    res.status(200).json(patient)
+    const formattedJson = JSON.stringify(patient, null, 2);
+    // Send data in the desired JSON format
+    const htmlResponse = `
+    <html>
+    <head>
+      <style>
+        body {
+          background-color: black;
+          color: white;
+        }
+      </style>
+    </head>
+    <body>
+      <pre>${formattedJson}</pre>
+    </body>
+  </html>`;
+
+    res.status(200).send(htmlResponse);
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
@@ -43,7 +60,41 @@ export const getPatient = async (req, res) => {
 
 export const getAllPatients = async (req, res) => {
   try {
-    const patients = await Patient.findAll();
+    const patient = await Patient.findAll();
+      // Convert data to the desired format
+      const formattedPatients = patient.map((patient) => {
+        return {
+          id: patient.id,
+          full_name: patient.full_name,
+          born_date: patient.born_date,
+          gender: patient.gender,
+          age: patient.age,
+          phone_num: patient.phone_num,
+          id_doctor: patient.id_doctor,
+          id_nurse: patient.id_nurse, 
+        };
+      });
+
+      // Convert data to the desired JSON format
+      const formattedJson = JSON.stringify(formattedPatients, null, 2);
+
+      // Send data in the desired JSON format
+      const htmlResponse = `
+      <html>
+      <head>
+        <style>
+          body {
+            background-color: black;
+            color: white;
+          }
+        </style>
+      </head>
+      <body>
+        <pre>${formattedJson}</pre>
+      </body>
+    </html>`;
+
+  res.status(200).send(htmlResponse);
     res.status(200).json(patients)
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -69,7 +120,7 @@ export const updatePatients = async (req, res) => {
 
     // validasi id_nurse
     const { id_nurse } = req.body;
-    const nurse = await Doctor.findOne({ where: {id: id_nurse}});
+    const nurse = await Nurse.findOne({ where: {id: id_nurse}});
     if (!nurse) {
       return res.status(404).json({ error: "Nurse not found on DB" });
     }

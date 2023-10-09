@@ -20,7 +20,24 @@ export const getDoctor = async (req, res) => {
     if (!doctor) {
       return res.status(404).json({ error: "Doctor not found on DB" });
     }
-    res.status(200).json(doctor)
+    const formattedJson = JSON.stringify(doctor, null, 2);
+    // Send data in the desired JSON format
+    const htmlResponse = `
+    <html>
+    <head>
+      <style>
+        body {
+          background-color: black;
+          color: white;
+        }
+      </style>
+    </head>
+    <body>
+      <pre>${formattedJson}</pre>
+    </body>
+  </html>`;
+
+    res.status(200).send(htmlResponse);
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
@@ -29,7 +46,40 @@ export const getDoctor = async (req, res) => {
 export const getAllDoctors = async (req, res) => {
   try {
     const doctor = await Doctor.findAll();
-    res.status(200).json(doctor)
+    // Convert data to the desired format
+    const formattedDoctors = doctor.map((doctor) => {
+      return {
+        id: doctor.id,
+        name: doctor.name,
+        born_date: doctor.born_date,
+        gender: doctor.gender,
+        address: doctor.address,
+        phone_num: doctor.phone_num,
+        specialist: doctor.specialist,
+        schedule: doctor.schedule, 
+      };
+    });
+
+    // Convert data to the desired JSON format
+    const formattedJson = JSON.stringify(formattedDoctors, null, 2);
+
+    // Send data in the desired JSON format
+    const htmlResponse = `
+    <html>
+    <head>
+      <style>
+        body {
+          background-color: black;
+          color: white;
+        }
+      </style>
+    </head>
+    <body>
+      <pre>${formattedJson}</pre>
+    </body>
+  </html>`;
+
+    res.status(200).send(htmlResponse);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

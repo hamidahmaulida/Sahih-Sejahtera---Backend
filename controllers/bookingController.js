@@ -28,7 +28,24 @@ export const getBooking = async (req, res) => {
       if (!booking) {
         return res.status(404).json({ error: "Booking not found on DB" });
       }
-      res.status(200).json(booking)
+      const formattedJson = JSON.stringify(booking, null, 2);
+      // Send data in the desired JSON format
+      const htmlResponse = `
+      <html>
+      <head>
+        <style>
+          body {
+            background-color: black;
+            color: white;
+          }
+        </style>
+      </head>
+      <body>
+        <pre>${formattedJson}</pre>
+      </body>
+    </html>`;
+  
+      res.status(200).send(htmlResponse);      
     } catch (error) {
       res.status(500).json({ error: error.message })
     }
@@ -37,7 +54,40 @@ export const getBooking = async (req, res) => {
 export const getAllBookings = async (req, res) => {
   try {
     const booking = await Booking.findAll();
-    res.status(200).json(booking);
+    // Convert data to the desired format
+    const formattedBookings = booking.map((booking) => {
+      return {
+        id: booking.id,
+        first_name: booking.first_name,
+        last_name: booking.last_name,
+        email: booking.email,
+        date: booking.date,
+        input: booking.input,
+        message: booking.message,
+        id_patient: booking.id_patient,
+      };
+    });
+
+    // Convert data to the desired JSON format
+    const formattedJson = JSON.stringify(formattedBookings, null, 2);
+
+    // Send data in the desired JSON format
+    const htmlResponse = `
+    <html>
+    <head>
+      <style>
+        body {
+          background-color: black;
+          color: white;
+        }
+      </style>
+    </head>
+    <body>
+      <pre>${formattedJson}</pre>
+    </body>
+  </html>`;
+
+    res.status(200).send(htmlResponse);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -46,7 +96,7 @@ export const getAllBookings = async (req, res) => {
 export const updateBookings = async (req, res) => {
   try {
     const { id } = req.params;
-    const { first_name, last_name, email, date, message } = req.body;
+    const { first_name, last_name, email, date, input, message } = req.body;
     const booking = await Booking.findOne({ where: {id: id }});
     
     if (!booking) {
@@ -64,6 +114,7 @@ export const updateBookings = async (req, res) => {
     booking.last_name = last_name;
     booking.email = email;
     booking.date = date;
+    booking.input = input;
     booking.message = message;
     booking.id_patient = id_patient;
 

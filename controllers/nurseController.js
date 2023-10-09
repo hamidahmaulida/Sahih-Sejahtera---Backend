@@ -1,5 +1,4 @@
 import { nanoid } from "nanoid";
-import Doctor from "../models/Doctor.js";
 import Nurse from "../models/nurse.js";
 
 export const createNurse = async (req, res) => {
@@ -21,7 +20,24 @@ export const getNurse = async (req, res) => {
     if (!nurse) {
       return res.status(404).json({ error: "Nurse not found on DB" });
     }
-    res.status(200).json(nurse);
+    const formattedJson = JSON.stringify(nurse, null, 2);
+    // Send data in the desired JSON format
+    const htmlResponse = `
+    <html>
+    <head>
+      <style>
+        body {
+          background-color: black;
+          color: white;
+        }
+      </style>
+    </head>
+    <body>
+      <pre>${formattedJson}</pre>
+    </body>
+  </html>`;
+
+    res.status(200).send(htmlResponse);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -30,7 +46,40 @@ export const getNurse = async (req, res) => {
 export const getAllNurses = async (req, res) => {
   try {
     const nurse = await Nurse.findAll();
-    res.status(200).json(nurse);
+        // Convert data to the desired format
+        const formattedNurses = nurse.map((nurse) => {
+          return {
+            id: nurse.id,
+            name: nurse.name,
+            born_date: nurse.born_date,
+            gender: nurse.gender,
+            address: nurse.address,
+            phone_num: nurse.phone_num,
+            specialist: nurse.specialist,
+            schedule: nurse.schedule, 
+          };
+        });
+    
+        // Convert data to the desired JSON format
+        const formattedJson = JSON.stringify(formattedNurses, null, 2);
+    
+        // Send data in the desired JSON format
+        const htmlResponse = `
+        <html>
+        <head>
+          <style>
+            body {
+              background-color: black;
+              color: white;
+            }
+          </style>
+        </head>
+        <body>
+          <pre>${formattedJson}</pre>
+        </body>
+      </html>`;
+    
+    res.status(200).send(htmlResponse);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
