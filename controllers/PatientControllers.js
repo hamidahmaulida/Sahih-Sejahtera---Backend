@@ -111,14 +111,14 @@ export const updatePatients = async (req, res) => {
       return res.status(404).json({ error: "Patient not found on DB" });
     }
 
-    // validasi id_doctor
+    // validation id_doctor
     const { id_doctor } = req.body;
     const doctor = await Doctor.findOne({ where: {id: id_doctor}});
     if (!doctor) {
       return res.status(404).json({ error: "Doctor not found on DB" });
     }
 
-    // validasi id_nurse
+    // validation id_nurse
     const { id_nurse } = req.body;
     const nurse = await Nurse.findOne({ where: {id: id_nurse}});
     if (!nurse) {
