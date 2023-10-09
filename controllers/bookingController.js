@@ -102,7 +102,7 @@ export const updateBookings = async (req, res) => {
     if (!booking) {
       return res.status(404).json({ error: "Booking not found on DB" });
     }
-    // validasi id_patient
+    // validation id_patient
     const { id_patient } = req.body;
     const patient = await Patient.findOne({ where: {id: id_patient}});
     if (!patient) {
@@ -118,7 +118,7 @@ export const updateBookings = async (req, res) => {
     booking.message = message;
     booking.id_patient = id_patient;
 
-    // simpan data
+    // save data
     await booking.save();
     res.status(200).json(booking);
   } catch (error) {

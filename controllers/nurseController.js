@@ -103,7 +103,7 @@ export const updateNurse = async (req, res) => {
       return res.status(404).json({ error: "Nurse not found on DB" });
     }
 
-    // Update data
+    // update data
     nurse.name = name;
     nurse.born_date = born_date;
     nurse.gender = gender;
@@ -112,7 +112,7 @@ export const updateNurse = async (req, res) => {
     nurse.specialist = specialist;
     nurse.schedule = schedule;
 
-    // simpan data
+    // save data
     await nurse.save();
     res.status(200).json(nurse);
   } catch (error) {

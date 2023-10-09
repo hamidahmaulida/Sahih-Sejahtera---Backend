@@ -1,3 +1,4 @@
+// routes/doctorRoutes.js
 import express from "express";
 import { createDoctor, getDoctor, getAllDoctors, updateDoctor, deleteDoctor } from "../controllers/doctorController.js";
 

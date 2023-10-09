@@ -1,3 +1,4 @@
+// routes/nurseRoutes.js
 import express from "express";
 import { createNurse, getNurse, getAllNurses, updateNurse, deleteNurse } from "../controllers/nurseController.js";
 

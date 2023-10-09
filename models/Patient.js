@@ -35,7 +35,7 @@ Patient.belongsTo(Doctor, { foreignKey: 'id_doctor' });
 Patient.belongsTo(Nurse, { foreignKey: 'id_nurse' });
 export default Patient;
 
-// If table "Patient" doesn't exist, this function creates it
+// if table "Patient" doesn't exist, this function creates it
 (async () => {
   await db.sync();
 })();

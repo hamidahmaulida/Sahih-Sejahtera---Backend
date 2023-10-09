@@ -31,7 +31,7 @@ const Doctor = db.define("doctor", {
 
 export default Doctor;
 
-// If table "Doctor" doesn't exist, this function creates it
+// if table "Doctor" doesn't exist, this function creates it
 (async () => {
   await db.sync();
 })();

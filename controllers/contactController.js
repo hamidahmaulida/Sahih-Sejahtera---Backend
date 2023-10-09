@@ -97,12 +97,12 @@ export const updateContact = async (req, res) => {
       return res.status(404).json({ error: "Contact not found on DB" });
     }
 
-    // Update data
+    // update data
     contact.name = name;
     contact.email = email;
     contact.message = message;
 
-    // Save data
+    // save data
     await contact.save();
     res.status(200).json(contact);
   } catch (error) {
