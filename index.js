@@ -8,6 +8,7 @@ import doctorRoutes from "./routes/doctorRoutes.js";
 import nurseRoutes from "./routes/nurseRoutes.js";
 import bookingRoutes from "./routes/bookingRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
+import db from "./config/database.js";
 
 const app = express(); // call function express.js
 const PORT = process.env.PORT || 5000;
@@ -36,7 +37,14 @@ app.use(nurseRoutes);
 app.use(bookingRoutes);
 app.use(contactRoutes);
 
-
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// db.sync() is for synchronize all models at once
+db.sync({ alter: true })
+    .then(() => {
+      console.log("Database connected")
+      app.listen(PORT, "0.0.0.0", () => {
+        console.log(`Server is running on port ${PORT}`);
+      });
+    })
+    .catch(error => {
+        console.log(`Database connection failed: ${error}`);
+    });

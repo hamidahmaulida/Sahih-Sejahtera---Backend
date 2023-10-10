@@ -31,8 +31,3 @@ const Nurse = db.define("nurse", {
 
 
 export default Nurse;
-
-// if table "nurse" doesn't exist, this function creates it
-(async () => {
-    await db.sync();
-})();

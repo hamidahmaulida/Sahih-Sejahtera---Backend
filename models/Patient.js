@@ -34,8 +34,3 @@ const Patient = db.define("patient", {
 Patient.belongsTo(Doctor, { foreignKey: 'id_doctor' });
 Patient.belongsTo(Nurse, { foreignKey: 'id_nurse' });
 export default Patient;
-
-// if table "Patient" doesn't exist, this function creates it
-(async () => {
-  await db.sync();
-})();

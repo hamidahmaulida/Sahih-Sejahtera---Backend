@@ -31,8 +31,3 @@ const Booking = db.define("booking", {
 });
 Patient.hasMany(Booking, { foreignKey: 'id_patient' });
 export default Booking;
-
-// if table "Booking" doesn't exist, this function creates it
-(async () => {
-    await db.sync();
-})();

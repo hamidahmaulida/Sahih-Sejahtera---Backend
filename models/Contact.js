@@ -18,8 +18,3 @@ const Contact = db.define("contact", {
 });
 
 export default Contact;
-
-// if table "Contact" doesn't exist, this function creates it
-(async () => {
-  await db.sync();
-})();
