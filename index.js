@@ -36,15 +36,13 @@ app.use(doctorRoutes);
 app.use(nurseRoutes);
 app.use(bookingRoutes);
 app.use(contactRoutes);
-
-// db.sync() is for synchronize all models at once
 db.sync({ alter: true })
-    .then(() => {
-      console.log("Database connected")
-      app.listen(PORT, "0.0.0.0", () => {
-        console.log(`Server is running on port ${PORT}`);
-      });
-    })
-    .catch(error => {
-        console.log(`Database connection failed: ${error}`);
-    });
+.then(() => {
+  console.log("Database connected")
+})
+.catch(error => {
+    console.log(`Database connection failed: ${error}`);
+});
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
