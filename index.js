@@ -14,7 +14,17 @@ const app = express(); // call function express.js
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(cors());
+
+const allowedOrigin = 'https://indigo-beaver-wrap.cyclic.app';
+app.use(cors({
+  origin: function (origin, callback) {
+    if (origin === allowedOrigin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Access denied from CORS'));
+    }
+  },
+}));
 
 // create logger middleware function
 function LoggerMiddleware(req, res, next) {
