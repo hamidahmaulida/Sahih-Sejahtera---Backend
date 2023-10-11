@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cors({
-  origin: 'https://indigo-beaver-wrap.cyclic.app/'
+  origin: 'https://kampus-merdeka-software-engineering.github.io'
 }));
 
 // create logger middleware function
