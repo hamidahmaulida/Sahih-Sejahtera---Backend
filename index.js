@@ -14,8 +14,10 @@ const app = express(); // call function express.js
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+const origin = 'https://kampus-merdeka-software-engineering.github.io/FE-Semarang-26';
+
 app.use(cors({
-  origin: 'https://kampus-merdeka-software-engineering.github.io/FE-Semarang-26',
+  origin,
   methods: 'GET, PUT, POST, DELETE',
   preflightContinue: false,
   optionsSuccessStatus: 204,
