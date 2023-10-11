@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors({
   origin: 'https://kampus-merdeka-software-engineering.github.io/FE-Semarang-26',
-  methods: 'GET,PUT,POST,DELETE',
+  methods: 'GET, PUT, POST, DELETE',
   preflightContinue: false,
   optionsSuccessStatus: 204,
   credentials: true,
