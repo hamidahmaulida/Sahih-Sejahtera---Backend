@@ -14,7 +14,9 @@ const app = express(); // call function express.js
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: 'https://indigo-beaver-wrap.cyclic.app/'
+}));
 
 // create logger middleware function
 function LoggerMiddleware(req, res, next) {
