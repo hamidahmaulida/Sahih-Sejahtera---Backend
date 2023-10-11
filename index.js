@@ -14,17 +14,7 @@ const app = express(); // call function express.js
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
-
-const allowedOrigin = 'https://indigo-beaver-wrap.cyclic.app';
-app.use(cors({
-  origin: function (origin, callback) {
-    if (origin === allowedOrigin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Access denied from CORS'));
-    }
-  },
-}));
+app.use(cors());
 
 // create logger middleware function
 function LoggerMiddleware(req, res, next) {
@@ -47,12 +37,12 @@ app.use(nurseRoutes);
 app.use(bookingRoutes);
 app.use(contactRoutes);
 db.sync({ alter: true })
-.then(() => {
-  console.log("Database connected")
-})
-.catch(error => {
+  .then(() => {
+    console.log("Database connected");
+  })
+  .catch((error) => {
     console.log(`Database connection failed: ${error}`);
-});
+  });
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
