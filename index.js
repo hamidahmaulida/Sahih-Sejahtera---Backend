@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cors({
-  origin: 'https://kampus-merdeka-software-engineering.github.io'
+  origin: 'https://kampus-merdeka-software-engineering.github.io/FE-Semarang-26'
 }));
 
 // create logger middleware function
