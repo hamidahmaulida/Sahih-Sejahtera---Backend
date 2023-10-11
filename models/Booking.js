@@ -19,7 +19,7 @@ const Booking = db.define("booking", {
     date: {
         type: DataTypes.DATE,
     },
-    input: {
+    select: {
         type: DataTypes.STRING,
     },
     message: {

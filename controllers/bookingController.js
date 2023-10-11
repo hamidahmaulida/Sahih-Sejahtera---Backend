@@ -62,7 +62,7 @@ export const getAllBookings = async (req, res) => {
         last_name: booking.last_name,
         email: booking.email,
         date: booking.date,
-        input: booking.input,
+        select: booking.select,
         message: booking.message,
         id_patient: booking.id_patient,
       };
@@ -96,7 +96,7 @@ export const getAllBookings = async (req, res) => {
 export const updateBookings = async (req, res) => {
   try {
     const { id } = req.params;
-    const { first_name, last_name, email, date, input, message } = req.body;
+    const { first_name, last_name, email, date, select, message } = req.body;
     const booking = await Booking.findOne({ where: {id: id }});
     
     if (!booking) {
@@ -114,7 +114,7 @@ export const updateBookings = async (req, res) => {
     booking.last_name = last_name;
     booking.email = email;
     booking.date = date;
-    booking.input = input;
+    booking.select = select;
     booking.message = message;
     booking.id_patient = id_patient;
 
