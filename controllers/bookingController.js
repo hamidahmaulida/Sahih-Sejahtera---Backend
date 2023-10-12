@@ -12,7 +12,7 @@ export const createBooking = async (req, res) => {
     // }
 
     const id = nanoid(5);
-    await Booking.create({ ...req.body });
+    await Booking.create({ ...req.body, id:id });
     res.status(201).json({
       msg: "Booking Created",
     });
