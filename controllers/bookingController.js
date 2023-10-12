@@ -123,7 +123,7 @@ export const updateBookings = async (req, res) => {
     res.status(200).json(booking);
   } catch (error) {
     res.status(500).json({ error: error.message });
-   }
+  }
 }
 
 export const deleteBooking = async (req, res) => {
