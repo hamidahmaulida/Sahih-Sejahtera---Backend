@@ -64,7 +64,7 @@ export const getAllBookings = async (req, res) => {
         date: booking.date,
         select: booking.select,
         message: booking.message,
-        id_patient: booking.id_patient,
+        // id_patient: booking.id_patient,
       };
     });
 
@@ -102,12 +102,12 @@ export const updateBookings = async (req, res) => {
     if (!booking) {
       return res.status(404).json({ error: "Booking not found on DB" });
     }
-    // validation id_patient
-    const { id_patient } = req.body;
-    const patient = await Patient.findOne({ where: {id: id_patient}});
-    if (!patient) {
-      return res.status(404).json({ error: "Patient not found on DB" });
-    }
+    // // validation id_patient
+    // const { id_patient } = req.body;
+    // const patient = await Patient.findOne({ where: {id: id_patient}});
+    // if (!patient) {
+    //   return res.status(404).json({ error: "Patient not found on DB" });
+    // }
 
     // Update data
     booking.first_name = first_name;
@@ -116,7 +116,7 @@ export const updateBookings = async (req, res) => {
     booking.date = date;
     booking.select = select;
     booking.message = message;
-    booking.id_patient = id_patient;
+    // booking.id_patient = id_patient;
 
     // save data
     await booking.save();
