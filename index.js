@@ -19,7 +19,7 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
    next();
 })
-const origin = 'https://kampus-merdeka-software-engineering.github.io/FE-Semarang-26';
+const origin = 'https://kampus-merdeka-software-engineering.github.io';
 
 app.use(cors({
   origin,
