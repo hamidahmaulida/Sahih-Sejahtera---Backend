@@ -8,11 +8,6 @@ export const createContact = async (req, res) => {
     await Contact.create({ ...req.body, id: id });
     res.status(201).json({
       msg: "Contact created",
-      data: {
-        name: name,
-        email: email,
-        message: message,
-      },
     });
   } catch (error) {
     res.send(error.message);
