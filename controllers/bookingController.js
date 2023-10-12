@@ -4,12 +4,12 @@ import Patient from "../models/Patient.js";
 
 export const createBooking = async (req, res) => {
   try {
-    // asosiasi booking dan patient
-    const { id_patient } = req.body;
-    const patient = await Patient.findOne({ where: {id: id_patient}});
-    if (!patient) {
-      return res.status(404).json({ error: "Patient not found on DB" });
-    }
+    // // asosiasi booking dan patient
+    // const { id_patient } = req.body;
+    // const patient = await Patient.findOne({ where: {id: id_patient}});
+    // if (!patient) {
+    //   return res.status(404).json({ error: "Patient not found on DB" });
+    // }
 
     const id = nanoid(5);
     await Booking.create({ ...req.body });
