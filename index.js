@@ -14,6 +14,11 @@ const app = express(); // call function express.js
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+   next();
+})
 const origin = 'https://kampus-merdeka-software-engineering.github.io/FE-Semarang-26';
 
 app.use(cors({
