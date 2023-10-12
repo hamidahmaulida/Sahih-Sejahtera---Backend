@@ -4,7 +4,6 @@ import Contact from "../models/Contact.js";
 export const createContact = async (req, res) => {
   try {
     const id = nanoid(5);
-    const { name, email, message } = req.body;
     await Contact.create({ ...req.body, id: id });
     res.status(201).json({
       msg: "Contact created",
