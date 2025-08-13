@@ -33,25 +33,6 @@ Proyek ini menyediakan **RESTful API** untuk aplikasi frontend, dengan fitur boo
 
 ---
 
-## 📦 Installation & Run
-
-```bash
-# Clone repository
-git clone https://github.com/username/sahihsejahtera-backend.git
-cd sahihsejahtera-backend
-
-# Install dependencies
-npm install
-
-# Salin .env.example dan isi sesuai kebutuhan
-cp .env.example .env
-
-# Jalankan server
-npm run dev
-```
-
----
-
 ## 📌 API Routes
 
 ### **Authentication**
