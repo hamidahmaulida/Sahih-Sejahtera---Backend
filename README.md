@@ -139,8 +139,3 @@ Content-Type: application/json
   "message": "Berhasil login"
 }
 ```
-
----
-
-Kalau kamu mau, aku bisa sekalian tambahin **"Live API URL"** kalau udah di-hosting biar HR bisa langsung coba API-nya tanpa setup manual.
-Mau aku tambahin link hosting-nya juga?
