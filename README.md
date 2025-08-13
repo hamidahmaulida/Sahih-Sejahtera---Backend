@@ -29,7 +29,7 @@ Proyek ini menyediakan **RESTful API** untuk aplikasi frontend, dengan fitur boo
 
 ## 🖼 Screenshot
 
-![Tampilan Aplikasi](./tampilan.png)
+![Tampilan Aplikasi](./home.png)
 
 ---
 
